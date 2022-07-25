@@ -1,0 +1,13 @@
+CD "C:/Angular/DevBoard"
+IF EXIST C:/Angular/DevBoard/temp/ RMDIR /S /Q temp
+MKDIR temp
+CD temp
+GIT clone https://Test:<personal-token>@gitlab.eng.vmware.com/<group-name>/common-services
+CD common-services
+XCOPY "C:\Angular\DevBoard\Git Workspace\" "C:\Angular\DevBoard\temp\common-services" /E
+<Remove Folders>
+DIR
+Git add .
+GIT commit -m "Added dependencies"
+GIT remote add ORIGIN https://Test:<personal-token>@gitlab.eng.vmware.com/<group-name>/common-services.git
+GIT push 
