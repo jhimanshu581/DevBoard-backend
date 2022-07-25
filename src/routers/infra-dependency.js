@@ -15,21 +15,21 @@ router.post("/infra-dependency",(req,res)=>{
     command = command.replaceAll("<personal-token>",req.header("PRIVATE-TOKEN"));
     command = command.replaceAll("<group-name>",req.body.groupName);
 
-    removeCommand = '';
-    if(req.body.kafka==false){
-        removeCommand += "RMDIR /S /Q kafka"+" & ";
+    addCommand = '';
+    if(req.body.kafka==true){
+        addCommand += 'XCOPY "C:\\Angular\\DevBoard\\Git Workspace\\kafka\\" "C:\\Angular\\DevBoard\\temp\\common-services" /E'+" & ";
     }
-    if(req.body.redis==false){
-        removeCommand += "RMDIR /S /Q redis"+" & ";
+    if(req.body.redis==true){
+        addCommand += 'XCOPY "C:\\Angular\\DevBoard\\Git Workspace\\redis\\" "C:\\Angular\\DevBoard\\temp\\common-services" /E'+" & ";
     }
-    if(req.body.mongodb==false){
-        removeCommand += "RMDIR /S /Q mongodb"+" & ";
+    if(req.body.mongodb==true){
+        addCommand += 'XCOPY "C:\\Angular\\DevBoard\\Git Workspace\\mongodb\\" "C:\\Angular\\DevBoard\\temp\\common-services" /E'+" & ";
     }
-    if(req.body.commonServicesExist==true){
-        removeCommand += "RMDIR /S /Q group-config"+" & ";
+    if(req.body.commonServicesExist==false){
+        addCommand += 'XCOPY "C:\\Angular\\DevBoard\\Git Workspace\\group-config\\" "C:\\Angular\\DevBoard\\temp\\common-services" /E'+" & ";
     }
-    removeCommand = removeCommand.trim().substring(0,removeCommand.length-2);
-    command = command.replaceAll("<Remove Folders>",removeCommand);
+    addCommand = addCommand.trim().substring(0,addCommand.length-2);
+    command = command.replaceAll("<Add Folders>",addCommand);
 
     console.log(command);
     exec(command, (error, stdout, stderr) => {

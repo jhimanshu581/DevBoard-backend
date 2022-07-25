@@ -4,8 +4,7 @@ MKDIR temp
 CD temp
 GIT clone https://Test:<personal-token>@gitlab.eng.vmware.com/<group-name>/common-services
 CD common-services
-XCOPY "C:\Angular\DevBoard\Git Workspace\" "C:\Angular\DevBoard\temp\common-services" /E
-<Remove Folders>
+<Add Folders>
 DIR
 Git add .
 GIT commit -m "Added dependencies"
